@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mujoco model="cartpole_1_link">
+  <compiler angle="radian" coordinate="local" />
+  <option timestep="0.0025" gravity="0 0 -9.8" />
+  <default>
+    <joint damping="0" frictionloss="0" armature="0" />
+    <geom density="650" friction="0.00001 0 0" contype="0" conaffinity="0" />
+  </default>
+  <asset>
+    <material name="cart" rgba="0.95 0.2 0.16 1" />
+    <material name="link" rgba="0.1 0.65 0.9 1" />
+    <material name="track" rgba="0.75 0.75 0.72 1" />
+  </asset>
+  <worldbody>
+    <light pos="0 -3 4" dir="0 0 -1" />
+    <geom name="rail" type="box" pos="0 0 -0.04" size="3 0.035 0.025" material="track" />
+    <body name="cart" pos="0 0 0">
+      <joint name="slider" type="slide" axis="1 0 0" limited="true" range="-2.4 2.4" />
+      <geom name="cart_box" type="box" size="0.16 0.10 0.08" material="cart" />
+      <body name="link_1" pos="0 0 0.08000">
+        <joint name="hinge_1" type="hinge" axis="0 1 0" damping="0" frictionloss="0" />
+        <geom name="rod_1" type="capsule" fromto="0 0 0 0 0 0.62000" size="0.01800" material="link" />
+        <site name="tip_1" pos="0 0 0.62000" size="0.018" />
+      </body>
+    </body>
+  </worldbody>
+  <actuator>
+    <motor name="cart_force" joint="slider" gear="1" ctrllimited="true" ctrlrange="-240 240" />
+  </actuator>
+  <sensor>
+    <jointpos name="cart_x" joint="slider" />
+    <jointvel name="cart_v" joint="slider" />
+    <jointpos name="theta_1" joint="hinge_1" />
+    <jointvel name="omega_1" joint="hinge_1" />
+  </sensor>
+</mujoco>

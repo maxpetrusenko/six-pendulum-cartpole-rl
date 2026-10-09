@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+.env.*
+*.pt
+*.pth
+*.npz
+*.mp4
+local-artifacts/
+outputs/
+node_modules/
+.DS_Store
